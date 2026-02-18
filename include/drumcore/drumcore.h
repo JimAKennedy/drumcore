@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------
 // Copyright(c) 2025-2026 JK Digital.
+// SPDX-License-Identifier: Apache-2.0
 // Convenience header for drumcore library.
 //------------------------------------------------------------------------
 
