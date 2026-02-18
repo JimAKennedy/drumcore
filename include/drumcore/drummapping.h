@@ -39,10 +39,8 @@ constexpr int32_t MID_TOM = 47;
  * @return GM MIDI note number
  */
 inline int32_t getNote(int instrumentIndex) {
-    constexpr int32_t NOTE_MAP[10] = {
-        KICK, SNARE, CLOSED_HH, OPEN_HH, RIM,
-        LOW_TOM, HIGH_TOM, CRASH, RIDE, PERCUSSION
-    };
+    constexpr int32_t NOTE_MAP[10] = {KICK,    SNARE,    CLOSED_HH, OPEN_HH, RIM,
+                                      LOW_TOM, HIGH_TOM, CRASH,     RIDE,    PERCUSSION};
 
     if (instrumentIndex >= 0 && instrumentIndex < 10) {
         return NOTE_MAP[instrumentIndex];

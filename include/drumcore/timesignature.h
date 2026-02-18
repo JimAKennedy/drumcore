@@ -8,15 +8,7 @@
 namespace JKDigital {
 
 /** Supported time signatures. */
-enum class TimeSignature {
-    k4_4 = 0,
-    k3_4 = 1,
-    k6_8 = 2,
-    k5_4 = 3,
-    k7_4 = 4,
-    k7_8 = 5,
-    k12_8 = 6
-};
+enum class TimeSignature { k4_4 = 0, k3_4 = 1, k6_8 = 2, k5_4 = 3, k7_4 = 4, k7_8 = 5, k12_8 = 6 };
 
 /**
  * Utility functions for time signature-aware step calculations.
@@ -29,14 +21,14 @@ namespace TimeSignatureUtils {
 /** Get the number of active steps for a time signature. */
 constexpr int getActiveSteps(TimeSignature timeSig) {
     switch (timeSig) {
-        case TimeSignature::k4_4:  return 32;
-        case TimeSignature::k3_4:  return 24;
-        case TimeSignature::k6_8:  return 24;
-        case TimeSignature::k5_4:  return 32;
-        case TimeSignature::k7_4:  return 32;
-        case TimeSignature::k7_8:  return 28;
-        case TimeSignature::k12_8: return 32;
-        default:                   return 32;
+    case TimeSignature::k4_4: return 32;
+    case TimeSignature::k3_4: return 24;
+    case TimeSignature::k6_8: return 24;
+    case TimeSignature::k5_4: return 32;
+    case TimeSignature::k7_4: return 32;
+    case TimeSignature::k7_8: return 28;
+    case TimeSignature::k12_8: return 32;
+    default: return 32;
     }
 }
 
@@ -48,28 +40,28 @@ constexpr double getBeatsPerStep() {
 /** Get the numerator of a time signature. */
 constexpr double getNumerator(TimeSignature timeSig) {
     switch (timeSig) {
-        case TimeSignature::k4_4:  return 4.0;
-        case TimeSignature::k3_4:  return 3.0;
-        case TimeSignature::k6_8:  return 6.0;
-        case TimeSignature::k5_4:  return 5.0;
-        case TimeSignature::k7_4:  return 7.0;
-        case TimeSignature::k7_8:  return 7.0;
-        case TimeSignature::k12_8: return 12.0;
-        default:                   return 4.0;
+    case TimeSignature::k4_4: return 4.0;
+    case TimeSignature::k3_4: return 3.0;
+    case TimeSignature::k6_8: return 6.0;
+    case TimeSignature::k5_4: return 5.0;
+    case TimeSignature::k7_4: return 7.0;
+    case TimeSignature::k7_8: return 7.0;
+    case TimeSignature::k12_8: return 12.0;
+    default: return 4.0;
     }
 }
 
 /** Get the denominator of a time signature. */
 constexpr double getDenominator(TimeSignature timeSig) {
     switch (timeSig) {
-        case TimeSignature::k4_4:  return 4.0;
-        case TimeSignature::k3_4:  return 4.0;
-        case TimeSignature::k6_8:  return 8.0;
-        case TimeSignature::k5_4:  return 4.0;
-        case TimeSignature::k7_4:  return 4.0;
-        case TimeSignature::k7_8:  return 8.0;
-        case TimeSignature::k12_8: return 8.0;
-        default:                   return 4.0;
+    case TimeSignature::k4_4: return 4.0;
+    case TimeSignature::k3_4: return 4.0;
+    case TimeSignature::k6_8: return 8.0;
+    case TimeSignature::k5_4: return 4.0;
+    case TimeSignature::k7_4: return 4.0;
+    case TimeSignature::k7_8: return 8.0;
+    case TimeSignature::k12_8: return 8.0;
+    default: return 4.0;
     }
 }
 
