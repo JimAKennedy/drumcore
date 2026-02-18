@@ -27,7 +27,7 @@ constexpr int32_t LOW_TOM = 45;
 constexpr int32_t HIGH_TOM = 50;
 constexpr int32_t CRASH = 49;
 constexpr int32_t RIDE = 51;
-constexpr int32_t PERCUSSION = 56;
+constexpr int32_t PERCUSSION = 39;  // Hand Clap (D#1)
 
 /** Legacy alias for backwards compatibility. */
 constexpr int32_t MID_TOM = 47;

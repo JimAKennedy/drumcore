@@ -158,6 +158,17 @@ struct DrumBar {
     /** Get a step at the specified instrument and position (const). */
     const DrumStep& getStep(int instrument, int step) const { return steps[instrument][step]; }
 
+    /** Remove steps with velocity below threshold (blending artifact cleanup). */
+    void gateVelocity(float threshold = 0.05f) {
+        for (int i = 0; i < NUM_INSTRUMENTS; ++i) {
+            for (int j = 0; j < STEPS_PER_BAR; ++j) {
+                if (steps[i][j].velocity > 0.0f && steps[i][j].velocity < threshold) {
+                    steps[i][j].clear();
+                }
+            }
+        }
+    }
+
     /** Check if the bar contains any notes. */
     bool hasNotes() const {
         for (int i = 0; i < NUM_INSTRUMENTS; ++i) {
