@@ -40,12 +40,12 @@ struct DrumStep {
     DrumStep() : velocity(0.0f), timingOffsetMs(0.0f), flags(0) {}
 
     /** Constructor with parameters. */
-    DrumStep(float vel, float offset, uint8_t f) : velocity(vel), timingOffsetMs(offset), flags(f) {}
+    DrumStep(float vel, float offset, uint8_t f)
+        : velocity(vel), timingOffsetMs(offset), flags(f) {}
 
     /** Mark this step as a ghost note. */
     void setGhost(bool enabled) {
-        if (enabled)
-            flags |= FLAG_GHOST;
+        if (enabled) flags |= FLAG_GHOST;
         else
             flags &= ~FLAG_GHOST;
     }
@@ -55,8 +55,7 @@ struct DrumStep {
 
     /** Mark this step as an accented note. */
     void setAccent(bool enabled) {
-        if (enabled)
-            flags |= FLAG_ACCENT;
+        if (enabled) flags |= FLAG_ACCENT;
         else
             flags &= ~FLAG_ACCENT;
     }
@@ -66,8 +65,7 @@ struct DrumStep {
 
     /** Mark this step as a candidate for fill patterns. */
     void setFillCandidate(bool enabled) {
-        if (enabled)
-            flags |= FLAG_FILL_CANDIDATE;
+        if (enabled) flags |= FLAG_FILL_CANDIDATE;
         else
             flags &= ~FLAG_FILL_CANDIDATE;
     }
@@ -121,12 +119,7 @@ struct DrumBar {
     static constexpr int kNumGenres = 10;
 
     /** Role/purpose of this bar in the pattern structure. */
-    enum class Role {
-        MainGroove = 0,
-        Break = 1,
-        Fill = 2,
-        Variation = 3
-    };
+    enum class Role { MainGroove = 0, Break = 1, Fill = 2, Variation = 3 };
 
     /** The drum pattern grid [instrument][step]. */
     DrumStep steps[NUM_INSTRUMENTS][STEPS_PER_BAR];
@@ -158,6 +151,17 @@ struct DrumBar {
     /** Get a step at the specified instrument and position (const). */
     const DrumStep& getStep(int instrument, int step) const { return steps[instrument][step]; }
 
+    /** Remove steps with velocity below threshold (blending artifact cleanup). */
+    void gateVelocity(float threshold = 0.05f) {
+        for (int i = 0; i < NUM_INSTRUMENTS; ++i) {
+            for (int j = 0; j < STEPS_PER_BAR; ++j) {
+                if (steps[i][j].velocity > 0.0f && steps[i][j].velocity < threshold) {
+                    steps[i][j].clear();
+                }
+            }
+        }
+    }
+
     /** Check if the bar contains any notes. */
     bool hasNotes() const {
         for (int i = 0; i < NUM_INSTRUMENTS; ++i) {
@@ -180,7 +184,7 @@ struct DrumBar {
  * Real-time safe: no allocations, no blocking.
  */
 class DrumPatternBuffer {
-public:
+  public:
     /** Buffer capacity (number of DrumBar slots). */
     static constexpr size_t CAPACITY = 8;
 
@@ -251,7 +255,7 @@ public:
         }
     }
 
-private:
+  private:
     DrumBar buffer_[CAPACITY];
     std::atomic<size_t> head_;
     std::atomic<size_t> tail_;

@@ -13,7 +13,7 @@ TEST(GMDrumMap, GetNote_ValidIndices) {
     EXPECT_EQ(GMDrumMap::getNote(6), 50);  // High Tom
     EXPECT_EQ(GMDrumMap::getNote(7), 49);  // Crash
     EXPECT_EQ(GMDrumMap::getNote(8), 51);  // Ride
-    EXPECT_EQ(GMDrumMap::getNote(9), 56);  // Percussion
+    EXPECT_EQ(GMDrumMap::getNote(9), 39);  // Percussion (Hand Clap)
 }
 
 TEST(GMDrumMap, GetNote_OutOfRange_ReturnsKick) {
@@ -47,6 +47,6 @@ TEST(GMDrumMap, NamedConstants) {
     EXPECT_EQ(GMDrumMap::HIGH_TOM, 50);
     EXPECT_EQ(GMDrumMap::CRASH, 49);
     EXPECT_EQ(GMDrumMap::RIDE, 51);
-    EXPECT_EQ(GMDrumMap::PERCUSSION, 56);
+    EXPECT_EQ(GMDrumMap::PERCUSSION, 39);
     EXPECT_EQ(GMDrumMap::MID_TOM, 47);
 }

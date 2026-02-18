@@ -18,12 +18,11 @@ namespace JKDigital {
  * @tparam T Type of elements (must be copyable)
  * @tparam Capacity Number of slots (must be power-of-2)
  */
-template <typename T, size_t Capacity = 16>
-class LockFreeQueue {
+template <typename T, size_t Capacity = 16> class LockFreeQueue {
     static_assert((Capacity & (Capacity - 1)) == 0, "Capacity must be a power of 2");
     static_assert(Capacity > 0, "Capacity must be greater than 0");
 
-public:
+  public:
     static constexpr size_t CAPACITY = Capacity;
 
     /** Constructor - initializes empty queue. */
@@ -82,7 +81,7 @@ public:
         tail_.store(0, std::memory_order_release);
     }
 
-private:
+  private:
     T buffer_[Capacity];
     std::atomic<size_t> head_;
     std::atomic<size_t> tail_;
