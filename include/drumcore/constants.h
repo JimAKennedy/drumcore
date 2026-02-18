@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------
 // Copyright(c) 2025-2026 JK Digital.
+// SPDX-License-Identifier: Apache-2.0
 // Shared constants for drum pattern processing.
 //------------------------------------------------------------------------
 
