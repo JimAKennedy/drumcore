@@ -33,12 +33,13 @@ if(DRUMCORE_BUILD_TESTS AND CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
     FetchContent_MakeAvailable(googletest)
 
     add_executable(drumcore_tests
+        tests/constants_test.cpp
         tests/drumgrid_test.cpp
         tests/drummapping_test.cpp
-        tests/timesignature_test.cpp
+        tests/genremapper_test.cpp
         tests/lockfreequeue_test.cpp
-        tests/constants_test.cpp
         tests/seed_test.cpp
+        tests/timesignature_test.cpp
     )
 
     target_link_libraries(drumcore_tests PRIVATE

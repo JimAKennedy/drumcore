@@ -23,6 +23,7 @@ ctest --test-dir build --output-on-failure
 |--------|---------|
 | `drumgrid.h` | `DrumStep`, `DrumBar`, `DrumPatternBuffer` — core 10x32 grid structures |
 | `drummapping.h` | `GMDrumMap` — GM MIDI note mappings for the 10-instrument grid |
+| `genremapper.h` | `GenreMapper` — constexpr genre string/index/normalized-value conversions |
 | `constants.h` | Shared constants (grid dimensions, tempo, velocity, timing) |
 | `timesignature.h` | `TimeSignature` enum and utility functions |
 | `lockfreequeue.h` | Generic SPSC lock-free queue template |
