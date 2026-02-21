@@ -38,6 +38,7 @@ if(DRUMCORE_BUILD_TESTS AND CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
         tests/timesignature_test.cpp
         tests/lockfreequeue_test.cpp
         tests/constants_test.cpp
+        tests/seed_test.cpp
     )
 
     target_link_libraries(drumcore_tests PRIVATE

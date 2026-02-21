@@ -163,6 +163,17 @@ struct DrumBar {
         }
     }
 
+    /** Copy all active hits from another bar (output must be pre-cleared). */
+    void copyHitsFrom(const DrumBar& src) {
+        for (int i = 0; i < NUM_INSTRUMENTS; ++i) {
+            for (int j = 0; j < STEPS_PER_BAR; ++j) {
+                if (src.steps[i][j].hasNote()) {
+                    steps[i][j] = src.steps[i][j];
+                }
+            }
+        }
+    }
+
     /** Check if the bar contains any notes. */
     bool hasNotes() const {
         for (int i = 0; i < NUM_INSTRUMENTS; ++i) {
