@@ -147,3 +147,52 @@ TEST(DrumPatternBuffer, Reset) {
     EXPECT_TRUE(buffer.isEmpty());
     EXPECT_EQ(buffer.size(), 0u);
 }
+
+TEST(DrumBar, CopyHitsFrom_CopiesActiveHits) {
+    DrumBar src;
+    src.getStep(0, 0).velocity = 0.9f;
+    src.getStep(0, 0).timingOffsetMs = 2.5f;
+    src.getStep(2, 16).velocity = 0.6f;
+
+    DrumBar dst;
+    dst.copyHitsFrom(src);
+
+    EXPECT_FLOAT_EQ(dst.getStep(0, 0).velocity, 0.9f);
+    EXPECT_FLOAT_EQ(dst.getStep(0, 0).timingOffsetMs, 2.5f);
+    EXPECT_FLOAT_EQ(dst.getStep(2, 16).velocity, 0.6f);
+}
+
+TEST(DrumBar, CopyHitsFrom_SkipsSilentSteps) {
+    DrumBar src;
+    src.getStep(0, 0).velocity = 0.9f;
+    // step (1, 0) is silent in src
+
+    DrumBar dst;
+    dst.getStep(1, 0).velocity = 0.5f;  // pre-existing hit in dst
+    dst.copyHitsFrom(src);
+
+    // dst's pre-existing hit should remain (silent src steps are not copied)
+    EXPECT_FLOAT_EQ(dst.getStep(1, 0).velocity, 0.5f);
+    EXPECT_FLOAT_EQ(dst.getStep(0, 0).velocity, 0.9f);
+}
+
+TEST(DrumBar, CopyHitsFrom_EmptySource_NoChange) {
+    DrumBar src;
+    DrumBar dst;
+    dst.getStep(3, 8).velocity = 0.7f;
+    dst.copyHitsFrom(src);
+    EXPECT_FLOAT_EQ(dst.getStep(3, 8).velocity, 0.7f);
+}
+
+TEST(DrumBar, CopyHitsFrom_PreservesFlags) {
+    DrumBar src;
+    src.getStep(0, 0).velocity = 0.8f;
+    src.getStep(0, 0).setGhost(true);
+    src.getStep(0, 0).setAccent(true);
+
+    DrumBar dst;
+    dst.copyHitsFrom(src);
+
+    EXPECT_TRUE(dst.getStep(0, 0).isGhost());
+    EXPECT_TRUE(dst.getStep(0, 0).isAccent());
+}

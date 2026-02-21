@@ -10,4 +10,5 @@
 #include <drumcore/drumgrid.h>
 #include <drumcore/drummapping.h>
 #include <drumcore/lockfreequeue.h>
+#include <drumcore/seed.h>
 #include <drumcore/timesignature.h>
