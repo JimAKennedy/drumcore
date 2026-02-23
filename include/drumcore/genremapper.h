@@ -55,28 +55,17 @@ constexpr int kNumGenres = DrumBar::kNumGenres;
  */
 constexpr const char* toGenreString(DrumBar::Genre genre) {
     switch (genre) {
-        case DrumBar::Genre::Rock:
-            return "rock";
-        case DrumBar::Genre::Latin:
-            return "latin";
-        case DrumBar::Genre::Funk:
-            return "funk";
-        case DrumBar::Genre::Jazz:
-            return "jazz";
-        case DrumBar::Genre::HipHop:
-            return "hiphop";
-        case DrumBar::Genre::Afrobeat:
-            return "afrobeat";
-        case DrumBar::Genre::NewOrleans:
-            return "neworleans";
-        case DrumBar::Genre::Afrocuban:
-            return "afrocuban";
-        case DrumBar::Genre::Other:
-            return "other";
-        case DrumBar::Genre::Uncertain:
-            return "uncertain";
-        default:
-            return "rock";
+    case DrumBar::Genre::Rock: return "rock";
+    case DrumBar::Genre::Latin: return "latin";
+    case DrumBar::Genre::Funk: return "funk";
+    case DrumBar::Genre::Jazz: return "jazz";
+    case DrumBar::Genre::HipHop: return "hiphop";
+    case DrumBar::Genre::Afrobeat: return "afrobeat";
+    case DrumBar::Genre::NewOrleans: return "neworleans";
+    case DrumBar::Genre::Afrocuban: return "afrocuban";
+    case DrumBar::Genre::Other: return "other";
+    case DrumBar::Genre::Uncertain: return "uncertain";
+    default: return "rock";
     }
 }
 
@@ -91,28 +80,17 @@ constexpr const char* toGenreString(DrumBar::Genre genre) {
  */
 constexpr const char* toDisplayString(DrumBar::Genre genre) {
     switch (genre) {
-        case DrumBar::Genre::Rock:
-            return "Rock";
-        case DrumBar::Genre::Latin:
-            return "Latin";
-        case DrumBar::Genre::Funk:
-            return "Funk";
-        case DrumBar::Genre::Jazz:
-            return "Jazz";
-        case DrumBar::Genre::HipHop:
-            return "HipHop";
-        case DrumBar::Genre::Afrobeat:
-            return "Afrobeat";
-        case DrumBar::Genre::NewOrleans:
-            return "New Orleans";
-        case DrumBar::Genre::Afrocuban:
-            return "Afrocuban";
-        case DrumBar::Genre::Other:
-            return "Other";
-        case DrumBar::Genre::Uncertain:
-            return "Uncertain";
-        default:
-            return "Rock";
+    case DrumBar::Genre::Rock: return "Rock";
+    case DrumBar::Genre::Latin: return "Latin";
+    case DrumBar::Genre::Funk: return "Funk";
+    case DrumBar::Genre::Jazz: return "Jazz";
+    case DrumBar::Genre::HipHop: return "HipHop";
+    case DrumBar::Genre::Afrobeat: return "Afrobeat";
+    case DrumBar::Genre::NewOrleans: return "New Orleans";
+    case DrumBar::Genre::Afrocuban: return "Afrocuban";
+    case DrumBar::Genre::Other: return "Other";
+    case DrumBar::Genre::Uncertain: return "Uncertain";
+    default: return "Rock";
     }
 }
 
