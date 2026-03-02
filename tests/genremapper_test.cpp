@@ -49,11 +49,15 @@ TEST(GenreMapperTest, ToDisplayString_ReturnsTitleCaseStrings) {
 TEST(GenreMapperTest, FromNormalizedValue_MapsCorrectly) {
     // 10 genres: value 0.0-1.0 maps to enum 0-9
     EXPECT_EQ(GenreMapper::fromNormalizedValue(0.0), DrumBar::Genre::Rock);
-    EXPECT_EQ(GenreMapper::fromNormalizedValue(0.09), DrumBar::Genre::Rock);        // 0.09 * 10 = 0.9 -> 0
-    EXPECT_EQ(GenreMapper::fromNormalizedValue(0.11), DrumBar::Genre::Latin);       // 0.11 * 10 = 1.1 -> 1
-    EXPECT_EQ(GenreMapper::fromNormalizedValue(0.45), DrumBar::Genre::HipHop);      // 0.45 * 10 = 4.5 -> 4
-    EXPECT_EQ(GenreMapper::fromNormalizedValue(0.95), DrumBar::Genre::Uncertain);   // 0.95 * 10 = 9.5 -> 9
-    EXPECT_EQ(GenreMapper::fromNormalizedValue(1.0), DrumBar::Genre::Uncertain);    // Clamped to max
+    EXPECT_EQ(GenreMapper::fromNormalizedValue(0.09),
+              DrumBar::Genre::Rock);  // 0.09 * 10 = 0.9 -> 0
+    EXPECT_EQ(GenreMapper::fromNormalizedValue(0.11),
+              DrumBar::Genre::Latin);  // 0.11 * 10 = 1.1 -> 1
+    EXPECT_EQ(GenreMapper::fromNormalizedValue(0.45),
+              DrumBar::Genre::HipHop);  // 0.45 * 10 = 4.5 -> 4
+    EXPECT_EQ(GenreMapper::fromNormalizedValue(0.95),
+              DrumBar::Genre::Uncertain);  // 0.95 * 10 = 9.5 -> 9
+    EXPECT_EQ(GenreMapper::fromNormalizedValue(1.0), DrumBar::Genre::Uncertain);  // Clamped to max
 }
 
 //------------------------------------------------------------------------
