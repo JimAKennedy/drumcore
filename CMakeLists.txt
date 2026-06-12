@@ -19,6 +19,8 @@ target_include_directories(drumcore INTERFACE
 
 # Tests
 option(DRUMCORE_BUILD_TESTS "Build drumcore tests" ON)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/jk_warnings.cmake)
+
 if(DRUMCORE_BUILD_TESTS AND CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
     enable_testing()
 
@@ -47,6 +49,8 @@ if(DRUMCORE_BUILD_TESTS AND CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
         gtest
         gtest_main
     )
+
+    jk_target_warnings(drumcore_tests)
 
     include(GoogleTest)
     gtest_discover_tests(drumcore_tests)

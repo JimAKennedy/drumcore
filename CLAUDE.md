@@ -37,3 +37,15 @@ ctest --test-dir build --output-on-failure
 - Copyright header: `Copyright(c) 2025-2026 JK Digital.`
 - Constants use `k` prefix in `Constants` namespace, UPPER_CASE in `GMDrumMap`
 - Test files: `tests/<name>_test.cpp` — one per header
+
+## Mempalace Auto-Capture
+
+After completing a task, evaluate whether any of the following should be persisted to mempalace:
+- **Decisions** — architectural choices, API design, header-only constraints
+- **Gotchas** — non-obvious pitfalls, template quirks, workarounds
+- **Conventions** — coding patterns, naming rules, structural norms that emerged
+- **Patterns** — reusable data structure or algorithm approaches
+
+**Wing routing:** This project maps to the `drumcore` wing. See `mempalace.yaml` for room details. Cross-cutting knowledge (build systems, testing patterns) goes to the `audio-plugins` wing.
+
+Use `mempalace_save` MCP tool to store captures. Be selective — only persist durable insights, not task-specific implementation details.
