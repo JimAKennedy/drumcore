@@ -36,6 +36,7 @@ if(DRUMCORE_BUILD_TESTS AND CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
 
     add_executable(drumcore_tests
         tests/constants_test.cpp
+        tests/denormalguard_test.cpp
         tests/drumgrid_test.cpp
         tests/drummapping_test.cpp
         tests/genremapper_test.cpp

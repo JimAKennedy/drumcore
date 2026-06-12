@@ -7,6 +7,7 @@
 #pragma once
 
 #include <drumcore/constants.h>
+#include <drumcore/denormalguard.h>
 #include <drumcore/drumgrid.h>
 #include <drumcore/drummapping.h>
 #include <drumcore/genremapper.h>
