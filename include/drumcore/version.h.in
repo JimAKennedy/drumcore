@@ -1,0 +1,12 @@
+//------------------------------------------------------------------------
+// Copyright(c) 2025-2026 JK Digital.
+// SPDX-License-Identifier: Apache-2.0
+// Auto-generated version header — do not edit manually.
+//------------------------------------------------------------------------
+
+#pragma once
+
+#define DRUMCORE_VERSION_MAJOR @drumcore_VERSION_MAJOR@
+#define DRUMCORE_VERSION_MINOR @drumcore_VERSION_MINOR@
+#define DRUMCORE_VERSION_PATCH @drumcore_VERSION_PATCH@
+#define DRUMCORE_VERSION_STRING "@drumcore_VERSION@"

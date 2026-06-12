@@ -148,6 +148,39 @@ TEST(DrumPatternBuffer, Reset) {
     EXPECT_EQ(buffer.size(), 0u);
 }
 
+TEST(DrumBar, GetStep_BoundaryIndices) {
+    DrumBar bar;
+    bar.getStep(0, 0).velocity = 0.5f;
+    bar.getStep(DrumBar::NUM_INSTRUMENTS - 1, DrumBar::STEPS_PER_BAR - 1).velocity = 0.8f;
+
+    EXPECT_FLOAT_EQ(bar.getStep(0, 0).velocity, 0.5f);
+    EXPECT_FLOAT_EQ(bar.getStep(9, 31).velocity, 0.8f);
+
+    const DrumBar& cbar = bar;
+    EXPECT_FLOAT_EQ(cbar.getStep(0, 0).velocity, 0.5f);
+    EXPECT_FLOAT_EQ(cbar.getStep(9, 31).velocity, 0.8f);
+}
+
+#ifndef NDEBUG
+TEST(DrumBarDeathTest, GetStep_InstrumentOutOfRange) {
+    DrumBar bar;
+    EXPECT_DEATH(bar.getStep(10, 0), "");
+    EXPECT_DEATH(bar.getStep(-1, 0), "");
+}
+
+TEST(DrumBarDeathTest, GetStep_StepOutOfRange) {
+    DrumBar bar;
+    EXPECT_DEATH(bar.getStep(0, 32), "");
+    EXPECT_DEATH(bar.getStep(0, -1), "");
+}
+
+TEST(DrumBarDeathTest, GetStepConst_OutOfRange) {
+    const DrumBar bar;
+    EXPECT_DEATH(bar.getStep(10, 0), "");
+    EXPECT_DEATH(bar.getStep(0, 32), "");
+}
+#endif
+
 TEST(DrumBar, CopyHitsFrom_CopiesActiveHits) {
     DrumBar src;
     src.getStep(0, 0).velocity = 0.9f;

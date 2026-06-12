@@ -7,6 +7,7 @@
 #pragma once
 
 #include <atomic>
+#include <cassert>
 #include <cstdint>
 #include <cstring>
 
@@ -147,10 +148,18 @@ struct DrumBar {
     }
 
     /** Get a step at the specified instrument and position. */
-    DrumStep& getStep(int instrument, int step) { return steps[instrument][step]; }
+    DrumStep& getStep(int instrument, int step) {
+        assert(instrument >= 0 && instrument < NUM_INSTRUMENTS);
+        assert(step >= 0 && step < STEPS_PER_BAR);
+        return steps[instrument][step];
+    }
 
     /** Get a step at the specified instrument and position (const). */
-    const DrumStep& getStep(int instrument, int step) const { return steps[instrument][step]; }
+    const DrumStep& getStep(int instrument, int step) const {
+        assert(instrument >= 0 && instrument < NUM_INSTRUMENTS);
+        assert(step >= 0 && step < STEPS_PER_BAR);
+        return steps[instrument][step];
+    }
 
     /** Remove steps with velocity below threshold (blending artifact cleanup). */
     void gateVelocity(float threshold = 0.05f) {

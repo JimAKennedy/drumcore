@@ -10,11 +10,57 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Generate version header from project(VERSION)
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/drumcore/version.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/include/drumcore/version.h
+    @ONLY
+)
+
 # Header-only INTERFACE library
 add_library(drumcore INTERFACE)
 target_include_directories(drumcore INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
     $<INSTALL_INTERFACE:include>
+)
+
+# Install rules
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
+install(TARGETS drumcore EXPORT drumcoreTargets)
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    PATTERN "*.in" EXCLUDE
+)
+
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(EXPORT drumcoreTargets
+    FILE drumcoreTargets.cmake
+    NAMESPACE drumcore::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/drumcore
+)
+
+configure_package_config_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/drumcore-config.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/drumcore-config.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/drumcore
+)
+
+write_basic_package_version_file(
+    ${CMAKE_CURRENT_BINARY_DIR}/drumcore-config-version.cmake
+    COMPATIBILITY SameMajorVersion
+)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/drumcore-config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/drumcore-config-version.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/drumcore
 )
 
 # Tests
@@ -32,6 +78,7 @@ if(DRUMCORE_BUILD_TESTS AND CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
         GIT_SHALLOW TRUE
     )
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
     FetchContent_MakeAvailable(googletest)
 
     add_executable(drumcore_tests
@@ -43,6 +90,7 @@ if(DRUMCORE_BUILD_TESTS AND CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
         tests/lockfreequeue_test.cpp
         tests/seed_test.cpp
         tests/timesignature_test.cpp
+        tests/version_test.cpp
     )
 
     target_link_libraries(drumcore_tests PRIVATE
