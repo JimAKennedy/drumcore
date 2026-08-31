@@ -9,8 +9,8 @@
 #include <cstdint>
 
 #if defined(__SSE__) || defined(_M_X64) || (defined(_M_IX86_FP) && _M_IX86_FP >= 1)
-#include <xmmintrin.h>
 #include <pmmintrin.h>
+#include <xmmintrin.h>
 #endif
 
 namespace JKDigital {
@@ -30,12 +30,12 @@ class DenormalGuard {
     DenormalGuard() noexcept {
 #if defined(__SSE__) || defined(_M_X64) || (defined(_M_IX86_FP) && _M_IX86_FP >= 1)
         saved_ = _mm_getcsr();
-        _mm_setcsr(saved_ | 0x8040); // FTZ (bit 15) | DAZ (bit 6)
+        _mm_setcsr(saved_ | 0x8040);  // FTZ (bit 15) | DAZ (bit 6)
 #elif defined(__aarch64__) || defined(_M_ARM64)
         uint64_t fpcr;
         __asm__ __volatile__("mrs %0, fpcr" : "=r"(fpcr));
         saved_ = static_cast<uint32_t>(fpcr);
-        fpcr |= (1 << 24); // FZ bit
+        fpcr |= (1 << 24);  // FZ bit
         __asm__ __volatile__("msr fpcr, %0" ::"r"(fpcr));
 #else
         saved_ = 0;
@@ -62,4 +62,4 @@ class DenormalGuard {
 
 using ScopedDenormalDisable = DenormalGuard;
 
-} // namespace JKDigital
+}  // namespace JKDigital
