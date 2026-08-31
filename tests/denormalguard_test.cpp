@@ -80,8 +80,7 @@ TEST(DenormalGuard, NestedGuards) {
             EXPECT_TRUE(_mm_getcsr() & kFTZ);
         }
         unsigned afterInnerDestroyed = _mm_getcsr();
-        EXPECT_TRUE(afterInnerDestroyed & kFTZ)
-            << "Outer guard's FTZ should still be active";
+        EXPECT_TRUE(afterInnerDestroyed & kFTZ) << "Outer guard's FTZ should still be active";
     }
     unsigned afterAll = _mm_getcsr();
     EXPECT_EQ(clean, afterAll) << "Original MXCSR should be fully restored";
@@ -103,4 +102,4 @@ TEST(DenormalGuard, AliasExists) {
                   "ScopedDenormalDisable should be an alias for DenormalGuard");
 }
 
-} // namespace JKDigital
+}  // namespace JKDigital
